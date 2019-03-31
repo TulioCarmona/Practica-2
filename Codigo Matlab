@@ -1,11 +1,18 @@
 %% Práctica 02: Señales en tiempo continuo
+%
 % *Intituto Politécnico Nacional*
+%
 % *Unidad Profesional Interdisciplinaria en Ingeniería y Tecnologías Avanzadas*
+%
 % *Análisis de Señales y Sistemas*
+%
 % *Grupo: 2MV1*
+%
 % *Alumnos:*
-% Ordorica Muñoz Leonardo Antonio
-% Carmona Bellido Marco Tulio
+% 
+% * Ordorica Muñoz Leonardo Antonio
+%
+% * Carmona Bellido Marco Tulio
 %% Introducción
 % MATLAB es un lenguaje de programación interpretado e interactivo, esto significa que a diferencia de C o
 % Fortran no se generan ejecutables sino que un programa llamado interprete recibe órdenes y las ejecuta.
@@ -18,7 +25,8 @@
 % con matrices siempre, por lo que se deben hacer ciertas consideraciones a la hora de realizar operaciones
 % entre estas, tales como la multiplicación de matrices, entre otros.
 % Se encuentra disponible como aplicación descargable e instalable en sistemas como Windows, OSX (Mac) y Linux.
-% <https://la.mathworks.com/products.html?s_tid=gn_ps Página oficial de Productos MATLAB>
+% <https://la.mathworks.com/products.html?s_tid=gn_ps Página oficial de Productos MATLAB.>
+%
 % Aunque se tienen alternativas descargables, tambien existen opciones disponibles en línea (no descargables),
 % tales como <https://octave-online.net/ Octave Online>, la cual es una plataforma casi idéntica a la sintaxis
 % Matlab, con excepción de que en Octave Online se permiten algunos comandos e instrucciones que en Matlab no
@@ -30,10 +38,12 @@
 % para evitar a sus estudiantes tener que aprender Fortran. Apareció como producto comercial en el año 1984
 % y desde entonces ha ido gandando adeptos, sobretodo en el campo del control lineal y no lineal y en la
 % ingeniería en general.
+%
 % *Cursos para Matlab y Octave:*
-% <https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-094-introduction-
-to-matlab-january-iap-2010/index.htm Matlab>
-% <https://www.edx.org/es/course/matlab-octave-beginners-epflx-matlabeoctavebeginnersx Octave y Matlab para Principiantes>
+%
+% * <https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-094-introduction-to-matlab-january-iap-2010/index.htm Matlab>
+%
+% * <https://www.edx.org/es/course/matlab-octave-beginners-epflx-matlabeoctavebeginnersx Octave y Matlab para Principiantes>
 
 %% Objetivos
 % * Manipulación básica de MATLAB
@@ -42,12 +52,21 @@ to-matlab-january-iap-2010/index.htm Matlab>
 % * Calculo de energía y potencia de señales continuas
 
 %% Desarrollo
-
-
-
+% 
+%% Problema 1
+%
+%% Problema 2
+%
+%% Problema 3
+%
+%% Problema 4
+%
+%% Problema 5
+%
+%% Problema 6
+%
+%% Problema 7
+%
 %% Referencias
 % # Guillem Borrell i Nogueras. (2007). _Octave: Una alternativa real a Matlab a coste cero._ Marzo 31, 2019,
-% de Universidad Politécnica de Madria Sitio web: <https://torroja.dmt.upm.es/media/files/paper_logrono.pdf https
-://torroja.dmt.upm.es/media/files/paper_logrono.pdf>
-
-
+% de Universidad Politécnica de Madria Sitio web: <https://torroja.dmt.upm.es/media/files/paper_logrono.pdf https://torroja.dmt.upm.es/media/files/paper_logrono.pdf>
