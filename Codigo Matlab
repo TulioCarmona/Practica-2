@@ -30,11 +30,24 @@
 % para evitar a sus estudiantes tener que aprender Fortran. Apareció como producto comercial en el año 1984
 % y desde entonces ha ido gandando adeptos, sobretodo en el campo del control lineal y no lineal y en la
 % ingeniería en general.
+% *Cursos para Matlab y Octave:*
+% <https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-094-introduction-
+to-matlab-january-iap-2010/index.htm Matlab>
+% <https://www.edx.org/es/course/matlab-octave-beginners-epflx-matlabeoctavebeginnersx Octave y Matlab para Principiantes>
+
 %% Objetivos
-%
-%
+% * Manipulación básica de MATLAB
+% * Gráficas de señales reales y complejas continuas
+% * Transformación de señales continuas (escalamientos y traslaciones)
+% * Calculo de energía y potencia de señales continuas
+
+%% Desarrollo
+
+
+
 %% Referencias
 % # Guillem Borrell i Nogueras. (2007). _Octave: Una alternativa real a Matlab a coste cero._ Marzo 31, 2019,
 % de Universidad Politécnica de Madria Sitio web: <https://torroja.dmt.upm.es/media/files/paper_logrono.pdf https
 ://torroja.dmt.upm.es/media/files/paper_logrono.pdf>
+
 
