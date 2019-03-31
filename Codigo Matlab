@@ -1,6 +1,40 @@
-%% Practica 2 Señale y sistemas
+%% Práctica 02: Señales en tiempo continuo
+% *Intituto Politécnico Nacional*
+% *Unidad Profesional Interdisciplinaria en Ingeniería y Tecnologías Avanzadas*
+% *Análisis de Señales y Sistemas*
+% *Grupo: 2MV1*
+% *Alumnos:*
+% Ordorica Muñoz Leonardo Antonio
+% Carmona Bellido Marco Tulio
+%% Introducción
+% MATLAB es un lenguaje de programación interpretado e interactivo, esto significa que a diferencia de C o
+% Fortran no se generan ejecutables sino que un programa llamado interprete recibe órdenes y las ejecuta.
+% Estas órdenes se comunican al intérprete mediante un lenguaje de programación que recibe el mismo
+% nombre que el programa, Matlab. Entonces utilizar Matlab es equivalente a programar en Matlab.
+% Matlab cuenta con una biblioteca de cálculo numérico y de ingeniería tan extensa como útil y el
+% intérprete es extensible mediante distintos lenguajes compilados como C y Fortran.
+% Matlab tiene la gran virtud convertir en triviales tareas fáciles como las operaciones elementales.
+% Matlab, abreviatura de MATrix LABoratory, "laboratorio de matrices", como su nombre lo indica, trabaja
+% con matrices siempre, por lo que se deben hacer ciertas consideraciones a la hora de realizar operaciones
+% entre estas, tales como la multiplicación de matrices, entre otros.
+% Se encuentra disponible como aplicación descargable e instalable en sistemas como Windows, OSX (Mac) y Linux.
+% <https://la.mathworks.com/products.html?s_tid=gn_ps Página oficial de Productos MATLAB>
+% Aunque se tienen alternativas descargables, tambien existen opciones disponibles en línea (no descargables),
+% tales como <https://octave-online.net/ Octave Online>, la cual es una plataforma casi idéntica a la sintaxis
+% Matlab, con excepción de que en Octave Online se permiten algunos comandos e instrucciones que en Matlab no
+% existen, un ejemplo son las instrucciones que se le pueden dar al declarar una variable, en Octave Online se le
+% puede indicar que cierta variable es un entero positivo, etc. Una de las ventajas muy importantes de Octave es que
+% es software libre (gratuito), que por otro lado, Matlab es un producto comercial. También existen otras alternativas
+% como <https://jupyter.org/ Jupyter>, el cual trabaja con el lenguaje Python pero que igual es muy amigable.
+% Matlab es un producto de MathWorks. Fue diseñado a finales de los 70 por Cleve Moler como una herramienta
+% para evitar a sus estudiantes tener que aprender Fortran. Apareció como producto comercial en el año 1984
+% y desde entonces ha ido gandando adeptos, sobretodo en el campo del control lineal y no lineal y en la
+% ingeniería en general.
+%% Objetivos
 %
-%% Desarrllo
 %
-%
-%Si puedo verlo xd (prueba de edición)
+%% Referencias
+% # Guillem Borrell i Nogueras. (2007). _Octave: Una alternativa real a Matlab a coste cero._ Marzo 31, 2019,
+% de Universidad Politécnica de Madria Sitio web: <https://torroja.dmt.upm.es/media/files/paper_logrono.pdf https
+://torroja.dmt.upm.es/media/files/paper_logrono.pdf>
+
