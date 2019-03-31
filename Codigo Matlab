@@ -130,14 +130,14 @@ title('Figura M1.2: f(t)=e^{-t}cos(2\pit) para t=(-2:0.01:2)')
 % En MATLAB, un operador relacional compara dos elementos. Si la comparación es verdadera, se devuelve un
 % verdadero lógico (1). Si la comparación es falsa, se devuelve un falso lógico (0). Algunas veces llamadas
 % funciones de indicador, los operadores relacionales indican si una condición es verdadera. Hay seis operadores
-% relacionales disponibles: <,>, <=, >=, == y ~=.
+% relacionales disponibles: < , >, < =, > =, == y ~=.
 %
 % La función escalón unitario se define facilmente utilizando el operador relacional >=.
 %%
 u=@(t) t>=0;
 %%
 % Cualquier función con una discontinuidad de salto, como el escalón unitario, es difícil de trazar. Considere
-% trazar u(t) usando t = (−2:2).
+% trazar u(t) usando t = (-2:2).
 %%
 t=(-2:2);
 figure
@@ -165,7 +165,7 @@ title('Figura M1.4: u(t) para t=(-2:0.01:2) con modificación de ejes');
 % del eje y, y el máximo del eje y, respectivamente. Los resultados mejorados se muestran en la Fig. M1.4.
 %
 % Los operadores relacionales se pueden combinar utilizando AND lógico, OR lógico y negación lógica: &, | y ~,
-% respectivamente. Por ejemplo, (t>0) y (t<1) y ~((t <= 0) | (t> = 1)) ambos prueban si 0<t<1. Para demostrar,
+% respectivamente. Por ejemplo, (t>0) y (t<1) y ~((t < = 0) | (t > = 1)) ambos prueban si 0<t<1. Para demostrar,
 % considere definir y trazar el pulso unitario p(t)= u(t)- u(t-1), como se
 % muestra en la Fig. M1.5.
 %%
@@ -191,12 +191,13 @@ title('Figura M1.5: p(t)= u(t)- u(t-1) sobre t=(-1:0.01:2)');
 % Los objetos Inline (en este caso anónimos) son adecuados para investigar ambas operaciones.
 % Considere $g(t)=f(t)u(t)=e^{-t} cos(2 \pi t) u(t)$
 % una versión realizable de f(t). Desafortunadamente, MATLAB no puede multiplicar los objetos inline (en este caso anonimos).
-% Es decir, MATLAB informa un error para g = f*u cuando f y u son objetos inline (en este caso anónimos). Más bien, g(t) necesita definirse explícitamente.
+% Es decir, MATLAB informa un error para g = f*u cuando f y u son objetos inline (en este caso anónimos). Más bien, g(t) necesita
+% definirse explícitamente.
 %%
 g=@(t) exp(-t).*cos(2*pi*t).*(t>=0);
 %%
 % Una operación combinada de desplazamiento y escalamiento se representa por g(at+b), donde a y b son constantes reales arbitrarias.
-% Como ejemplo, considere graficar g(2t+1) sobre (−2 &ge; t &ge; 2). Con a = 2, la función se comprime por un factor de 2, lo que da
+% Como ejemplo, considere graficar g(2t+1) sobre (-2 &le; t &le; 2). Con a = 2, la función se comprime por un factor de 2, lo que da
 % como resultado el doble de oscilaciones por unidad t. Añadiendo la condición b > 0, la forma de onda se desplaza hacia la izquierda.
 % Dada la función inline(en este caso anónima) g, una grafica precisa es casi trivial de obtener.
 %%
@@ -210,7 +211,7 @@ title('Figura M1.6: g(2t+1) sobre t=(-2:0.01:2)');
 % g(·) se activa cuando el argumento de entrada es cero. Por lo tanto, g(2t+1) debe encenderse cuando 2t+1 = 0 o en t = −0.5, un hecho confirmado
 % nuevamente por la Figura M1.6.
 %
-% A continuación, considere la posibilidad de trazar g(−t+1) sobre (−2 %ge; t &ge; 2). Desde a < 0, la forma de onda se reflejará. Al agregar la condición b > 0,
+% A continuación, considere la posibilidad de trazar g(-t+1) sobre (-2 &le; t &le; 2). Desde a < 0, la forma de onda se reflejará. Al agregar la condición b > 0,
 % la forma de onda final se desplaza hacia la derecha.
 %%
 figure
@@ -220,13 +221,15 @@ title('Figura M1.7: g(-t+1) sobre t=(-2:0.01:2)');
 %%
 % La Figura M1.7 confirma tanto la reflexión como el cambio a la derecha.
 %
-% Hasta este punto, las Figuras M1.6 y M1.7 se pueden bosquejar razonablemente a mano. Considere trazar la función más complicada h(t) = g(2t+1) + g(−t+1) sobre
-% (−2 &ge; t &ge; 2) (Figura. M1.8). En este caso, un boceto a mano preciso es bastante difícil. Con MATLAB, el trabajo es mucho menos complicado.
+% Hasta este punto, las Figuras M1.6 y M1.7 se pueden bosquejar razonablemente a mano. Considere trazar la función más complicada h(t) = g(2t+1) + g(-t+1) sobre
+% (-2 &le; t &le; 2) (Figura. M1.8). En este caso, un boceto a mano preciso es bastante difícil. Con MATLAB, el trabajo es mucho menos complicado.
 %%
 figure
 plot(t,g(2*t+1)+g(-t+1));
 xlabel('t'); ylabel('h(t)'); grid;
 title('Figura M1.8: h(t)=g(2t+1) + g(-t+1) sobre t=(-2:0.01:2)');
+%%
+% *M1.4: Integración numérica y estimación de la energía de la señal*
 %% Problema 5
 %
 %% Problema 6
