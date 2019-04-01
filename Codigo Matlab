@@ -230,6 +230,61 @@ xlabel('t'); ylabel('h(t)'); grid;
 title('Figura M1.8: h(t)=g(2t+1) + g(-t+1) sobre t=(-2:0.01:2)');
 %%
 % *M1.4: Integración numérica y estimación de la energía de la señal*
+%%
+% Señales interesantes a menudo tienen representaciones matemáticas no triviales. Calcular la energía de la señal, que implica integrar
+% el cuadrado de estas expresiones, puede ser una tarea desalentadora. Afortunadamente, muchas integrales difíciles se pueden estimar con
+% precisión mediante técnicas de integración numérica. Incluso si la integración parece simple, la integración numérica proporciona una buena
+% manera de verificar los resultados analíticos.
+%
+% Para comenzar, considere la señal simple $x(t)=e^{-t} (u(t) - u(t - 1))$. La energía de x(t) se expresa como $Ex=\int_{-\infty}^{\infty} |x(t)|^2 dt = \int_{0}^{1} e^{-2t} dt$.
+% La integración produce $Ex=0.5 (1 -e^{-2}) \approx 0.4323$. La integral de energía también puede ser evaluada numéricamente.
+% La Figura 1.27 ayuda a ilustrar el método simple de aproximación rectangular: evalúe el integrando en puntos uniformemente separados por $\Delta t$, multiplique cada uno por $\Delta t$ para
+% calcular las áreas del rectángulo, y luego sume todos los rectángulos.
+% <https://i.ibb.co/XFPpSv0/FIG27.png Figura 27>: Representación de una
+% señal en terminos de componentes de impulso y escalon.
+% 
+% Primero, creamos la función x (t).
+%%
+x=@(t) exp(-t).*((t>=0)&(t<1));
+%%
+% Dejamos $\Delta t=0.01$, se crea un vector de tiempo adecuado.
+%%
+t=(0:0.01:1);
+%%
+% El resultado final es computado usando el comando sum.
+%%
+E_x=sum(x(t).*x(t)*0.01)
+%%
+% El resultado no es perfecto, pero al 1% de error relativo, está cerca. Al reducir $\Delta t$, se mejora la aproximación. Por ejemplo, $\Delta t$ = 0.001 produce E_x = 0.4328, o 0.1% de error relativo.
+% Aunque es fácil de visualizar, la aproximación rectangular no es la mejor técnica de integración numérica. La función de MATLAB quad (integral para versiones recientes) implementa una mejor técnica de
+% integración numérica llamada cuadratura recursiva adaptativa de Simpson. Para operar, quad requiere una función que describa el integrando, el límite inferior de integración y el límite superior de
+% integración. Tenga en cuenta que no es necesario especificar $\Delta t$.
+%
+% Para usar quad para estimar Ex, primero se debe describir el integrando.
+%%
+x_squared=@(t) exp(-2*t).*((t>=0)&(t<1));
+%%
+% Estimando Ex inmediatamente sigue.
+%%
+E_x= quad(x_squared,0,1)
+%%
+% En este caso, el error relativo es -0.0026%.
+%
+% Se pueden usar las mismas técnicas para estimar la energía de señales más complejas. Considere g(t), definido previamente. La energía se expresa como, $Eg =\int_{0}^{\infty} e^{-2t} cos^2(2 \pi t) dt$.
+% Existe una solución de forma cerrada, pero requiere un poco de esfuerzo. MATLAB proporciona una respuesta más rápidamente.
+%%
+g_squared=@(t) exp(-2*t).*(cos(2*pi*t).^2).*(t>=0);
+%%
+% Aunque el límite superior de integración es infinito, la envoltura decreciente exponencial garantiza que g(t) sea efectivamente cero mucho antes de t = 100. Por lo tanto, se usa un límite superior
+% de t = 100 junto con $\Delta t = 0.001$.
+%%
+t=(0:0.001:100);
+E_g=sum(g_squared(t)*0.001)
+%%
+% Se obtiene una aproximación ligeramente mejor con la función quad.
+%%
+E_g=quad(g_squared,0,100)
+%%
 %% Problema 5
 %
 %% Problema 6
