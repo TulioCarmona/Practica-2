@@ -286,7 +286,75 @@ E_g=sum(g_squared(t)*0.001)
 E_g=quad(g_squared,0,100)
 %%
 %% Problema 5
+% *1.2.2.- Para la señal x(t) ilustrada en la <https://i.ibb.co/V32bhcd/Figura1-2-2.png Figura P1.2-2>, bosqueje:*
+% * a. x(t-4)
+% * b. x(t/1.5)
+% * c. x(-t)
+% * d. x(2t-4)
+% * e. x(2-t)
 %
+% Primero se define la función (utilizaremos funciones anónimas)
+%%
+t=(-50:0.01:50);
+x=@(t) -t.*((t>=-4)&(t<0))+t.*((t>=0)&(t<=2));
+plot(t,x(t))
+xlabel('t'); ylabel('x(t)'); grid;
+axis([-6 4 -2 6]);
+title('x(t)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% * *a. x(t-4)*
+%%
+plot(t,x(t-4))
+xlabel('t'); ylabel('x(t-4)'); grid;
+axis([-2 10 -2 6]);
+title('x(t-4)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% * *b. x(t/1.5)*
+%%
+plot(t,x(t/1.5))
+xlabel('t'); ylabel('x(t/1.5)'); grid;
+axis([-9 6 -2 6]);
+title('x(t/1.5)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% * *c. x(-t)*
+%%
+plot(t,x(-t))
+xlabel('t'); ylabel('x(-t)'); grid;
+axis([-4 6 -2 6]);
+title('x(-t)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% * *d. x(2t-4)*
+%%
+plot(t,x(2*t-4))
+xlabel('t'); ylabel('x(2t-4)'); grid;
+axis([-1 4 -2 6]);
+title('x(2t-4)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% * *e. x(2-t)*
+%%
+plot(t,x(2-t))
+xlabel('t'); ylabel('x(2-t)'); grid;
+axis([-2 8 -2 6]);
+title('x(2-t)');
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
 %% Problema 6
 %
 %% Problema 7
