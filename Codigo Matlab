@@ -54,9 +54,28 @@
 %% Desarrollo
 % 
 %% Problema 1
+% Creemos una funcion con el nombre fun1 que reciba dos parametros, como se
+% muestra a continuacion:
 %
+%   function [outputArg1] = fun1(a,w)
+%   outputArg1 = outputArg1 = a./(a^2. + w.^2);
+%   end
+%
+% La funcion funciona para $a \in R$ y $w \in R^n$.
+% Notece el uso del punto tanto en el numerador como en el denominador,
+% esto se debe a que $w$ puede ser un escalar, un vector o una matriz, de
+% ser así el punto le indica a matlab que tando la divición como
+% multiplicación o cualquier otro operacion que involucre a $w$ la debe realizar por cada elemento dentro de $w$.
 %% Problema 2
-%
+% Ahora creemos una funcion de $f:R\rightarrow R$ que realice la operacion pasada con $a=1$ pero que
+% grafique $w$ contra $F(w)$, para efectos practicos solo se mostrara el
+% uso de la funcion y la grafica que esta genera.
+% Primero se creará el vector $w$ y posteriormente se llamara a nuestra
+% funcion que mostrara la grafica a la cual llamaremos _fun2_ que recibira a $w$ y $a$, tambien se
+% le asignara a $a$ un valor de 1 para este ejemplo.
+%%
+w = -2:0.001:2;
+fun2(w,a);
 %% Problema 3
 %
 %% Problema 4
@@ -208,7 +227,7 @@ xlabel('t'); ylabel('g(2t+1)'); grid;
 title('Figura M1.6: g(2t+1) sobre t=(-2:0.01:2)');
 %%
 % La Figura M1.6 confirma la compresión de forma de onda esperada y el desplazamiento a la izquierda. Como comprobación final, tenga en cuenta que la función
-% g(·) se activa cuando el argumento de entrada es cero. Por lo tanto, g(2t+1) debe encenderse cuando 2t+1 = 0 o en t = −0.5, un hecho confirmado
+% g(·) se activa cuando el argumento de entrada es cero. Por lo tanto, g(2t+1) debe encenderse cuando 2t+1 = 0 o en t = ?0.5, un hecho confirmado
 % nuevamente por la Figura M1.6.
 %
 % A continuación, considere la posibilidad de trazar g(-t+1) sobre (-2 &le; t &le; 2). Desde a < 0, la forma de onda se reflejará. Al agregar la condición b > 0,
