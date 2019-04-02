@@ -75,9 +75,19 @@
 % le asignara a $a$ un valor de 1 para este ejemplo.
 %%
 w = -2:0.001:2;
+a = 1;
 fun2(w,a);
 %% Problema 3
 %
+% Para el siguiente problema construiremos una funcion $f : R \rightarrow R^2$
+% esta funcion $F(w)$ sera la transformada de Fourier de $f(t)=e^{-2t}u(t)$
+% para $w=[-10,10]$.
+% A esta funcion la llamaremos _fun3_ su unico parametro de entrada sera el
+% valor el vector $w$ que contiene los valores en los que sera evaluada la
+% funcion.
+%%
+w = -10:0.001:10;
+fun3(w);
 %% Problema 4
 % *M1.1 Funciones Inline (aqui son anónimas)*
 %
