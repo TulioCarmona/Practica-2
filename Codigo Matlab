@@ -10,9 +10,10 @@
 %
 % *Alumnos:*
 % 
+% * Carmona Bellido Marco Tulio
+%
 % * Ordorica Muñoz Leonardo Antonio
 %
-% * Carmona Bellido Marco Tulio
 %% Introducción
 % MATLAB es un lenguaje de programación interpretado e interactivo, esto significa que a diferencia de C o
 % Fortran no se generan ejecutables sino que un programa llamado interprete recibe órdenes y las ejecuta.
@@ -385,6 +386,116 @@ ax.XAxisLocation = 'origin';
 ax.YAxisLocation = 'origin';
 %%
 %% Problema 6
+% Funcion que calcula la energia de una señal al ingresar una funcion
+% simbolica o anonima
+%%
+%function [ex] = energia(y,linf,lsup) % La funcion energia pide un limite inferior y un limite superior
+%v=isa(y,'function_handle');% Se comprueba si la señal es una funcion anonima
+%if v==1
+%    t=linf:0.01:lsup;
+%    ex=sum(y(t).*y(t).*0.01); % Se usa la funcion sum para señales anonimas
+%else
+%    syms t; % Se declara la variable simbolica para funciones simbolicas
+%    ex=int(y^2,t,linf,lsup); % Se realiza la integral usando la funcion int
+%end
+%end
+%%
+% A continuacion como prueba se resolvera el Problema Propuesto 1.1.3 del
+% Lathi
+%
+% *Problema 1.1.3*
+%
+% Encuentra las energias del par de señales x(t) y y(t) y la energia
+% de x(t) + y(t) y x(t) - y(t)
+%
+% * *a.1.-*
+% Primero se definen las señales x(t) y y(t), en este caso como funciones
+% anonimas, dado que estan definidas a trozos.
+%%
+x=@(t) 1*((t>=0)&(t<2));
+y=@(t) 1*((t>=0)&(t<1))-1*((t>=1)&(t<2));
+%%
+% A continuacion se llama a la funcion energia que nos devolvera el calculo
+% de las energias de las señales
+%
+% La energia de la señal x:
+%%
+energia(x,0,2)
+%%
+% La energia de la señal y:
+%%
+energia(y,0,2)
+%%
+% La energia de la señal x(t) + y(t):
+%%
+xy1=@(t) 2*((t>=0)&(t<1));%xy1 = x(t)+ y(t)
+energia(xy1,0,2)
+%%
+% La energia de la señal x(t) - y(t):
+%%
+xy2=@(t) 2*((t>=1)&(t<2));%xy1 = x(t)- y(t)
+energia(xy2,0,2)
+%%
+% Como podemos observar la energia de la señal x(t) + y(t) es igual a la de
+% la señal x(t) - y(t)
+%
+% * *a.2.-*
+% Se definen las señales x(t) y y(t) como funciones simbolicas
+%%
+syms t;
+x=sin(t);
+y=1;
+%%
+% A continuacion se llama a la funcion energia que nos devolvera el calculo
+% de las energias de las señales
+%
+% La energia de la señal x:
+%%
+energia(x,0,2*pi)
+%%
+% La energia de la señal y:
+%%
+energia(y,0,2*pi)
+%%
+% La energia de la señal x(t) + y(t):
+%%
+energia(x+y,0,2*pi)
+%%
+% La energia de la señal x(t) - y(t):
+%%
+energia(x-y,0,2*pi)
+%%
+% Como podemos observar la energia de la señal x(t) + y(t) es igual a la de
+% la señal x(t) - y(t)
+%
+% * *b.-*
+% % Se definen las señales x(t) y y(t) como funciones simbolicas
+%%
+syms t;
+x=sin(t);
+y=1;
+%%
+% A continuacion se llama a la funcion energia que nos devolvera el calculo
+% de las energias de las señales
+%
+% La energia de la señal x:
+%%
+energia(x,0,pi)
+%%
+% La energia de la señal y:
+%%
+energia(y,0,pi)
+%%
+% La energia de la señal x(t) + y(t):
+%%
+energia(x+y,0,pi)
+%%
+% La energia de la señal x(t) - y(t):
+%%
+energia(x-y,0,pi)
+%%
+% Como podemos observar la energia de la señal x(t) + y(t) ya no es igual a la de
+% la señal x(t) - y(t)
 %
 %% Problema 7
 %
