@@ -498,6 +498,55 @@ energia(x-y,0,pi)
 % la señal x(t) - y(t)
 %
 %% Problema 7
+% Funcion que calcula la potencia de una señal al ingresar una expresion simbolica o
+% anonima
+%%
+%function [ex] = potencia(y,linf,lsup) % La funcion potencia pide un limite inferior y un limite superior
+%T=lsup-linf;
+%v=isa(y,'function_handle');
+%if v==1
+%    t=linf:0.01:lsup;
+%    px=(1/T).*sum(y(t).*y(t).*0.01);
+%else
+%    syms t;
+%    px=(1/T)*int(y^2,t,linf,lsup);
+%end
+%end
+%%
+% A continuacion como prueba se resolvera el Problema Propuesto 1.1.4 del Lathi
+%
+% *Problema 1.1.4*
+%
+% Encuentra la potencia de la señal periodica x(t).
+% Se define la señal de forma simbolica:
+syms t;
+x=t^3;
+%%
+% A continuacion se llama a la funcion energia que nos devolvera el calculo
+% de la potencia de la señal
+%%
+potencia(x,-2,2)
+%%
+% Adicionalmente calcule las potencias y los valores rms de:
+%
+% * *-x(t)*
+%%
+potencia(-x,-2,2)
+%%
+% Podemos observar que la potencia de la señal -x(t) es la misma que la de
+% la señal x(t)
+%
+% * *2x(t)*
+%%
+potencia(2*x,-2,2)
+%%
+% * *cx(t)*
+%%
+syms c;
+potencia(c*x,-2,2)
+%%
+% La energia de la señal cx(t) es la energia de la señal x(t) multiplicada
+% por $c^{2}$
 %
 %% Referencias
 % # Guillem Borrell i Nogueras. (2007). _Octave: Una alternativa real a Matlab a coste cero._ Marzo 31, 2019,
