@@ -65,7 +65,8 @@
 %
 % Con eso se ejemplifican los problemas que se tienen al realizar un
 % escalamiento horizontal en señales en tiempo discreto.
-%%% Objetivos
+%
+%% Objetivos
 % * Manipulación básica de MATLAB
 % * Gráficas de señales reales y complejas discretas
 % * Transformación de señales discretas (escalamientos y traslaciones)
