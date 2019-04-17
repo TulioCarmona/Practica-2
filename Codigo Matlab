@@ -43,9 +43,25 @@
 %% Desarrollo
 % 
 %% Problema 1
+% Se crea una funcion $f:N \rightarrow R$ la funcion la llamaremos _fun1_ y
+% regreseara la evaluación de $f[n]=r^ncos[\Omega n]+ r^nsen(\Omega n)j$,
+% para que se pueda ejecutar se le tendra que enviar el valor de _r_ y de
+% $\Omega$ asi como el funto en que se desea evaliar la funcion que en este
+% caso será $n_0$.
 %
+%   function [a] = fun1(r,w,n0)
+%   f = @(n) (r^n)*cos(w*n) + (r^n)*sin(w*n)*i;
+%   a = f(n0);
+%   end
 %% Problema 2
+% A continuacuón crearemos una funcion de matlab _fun2_ que grafique en tiempo
+% discreto la siguiente función $x[n]=na^nu[n]$ para $n= -2,...,10$ y con
+% $a=0.9$. A la funcion solo se le enviaran los parametros pues estara
+% previamente definida para evaluar la funcion antes mensionada.
 %
+n = -2:10;
+a = 0.9;
+fun2(n,a)
 %% Problema 3
 %
 %% Problema 4
@@ -53,16 +69,17 @@
 % parámetros un vector de tiempo y las alturas asignadas a cada entero del
 % vector de tiempo e imprime la gráfica de la señal.
 %%
-%function [ex] = energiadis(tiempo,alturas) % La funcion energia pide un limite inferior y un limite superior
-%    ex=sum(alturas.*alturas); % Se usa la funcion sum para sumar todas las alturas de la señal
-%    stem(tiempo,alturas)
-%    xlabel('n'); ylabel('x[n]'); grid;
-%    title('Gráfica de la señal ingresada');
-%    axis([min(tiempo)-2 max(tiempo)+2 min(alturas)-2 max(alturas)+2]);
-%    ax = gca;
-%    ax.XAxisLocation = 'origin';
-%    ax.YAxisLocation = 'origin';
-%end
+%   function [ex] = energiadis(tiempo,alturas) % La funcion energia pide un limite inferior y un limite superior
+%   ex=sum(alturas.*alturas); % Se usa la funcion sum para sumar todas las alturas de la señal
+%   stem(tiempo,alturas)
+%   xlabel('n'); ylabel('x[n]'); 
+%   grid on;
+%   title('Gráfica de la señal ingresada');
+%   axis([min(tiempo)-2 max(tiempo)+2 min(alturas)-2 max(alturas)+2]);
+%   ax = gca;
+%   ax.XAxisLocation = 'origin';
+%   ax.YAxisLocation = 'origin';
+%   end
 %
 %% Problema 5
 % Resuelva el problema 3.1.1 c) de Lathi, aplicando su función anterior
