@@ -21,6 +21,9 @@
 % Por lo tanto al realizar un escalamiento horizontal, si este queda
 % definido para un numero decimal, se perderian los datos que quedaban
 % contenidos en esos puntos.
+% 
+% Lo que se hace es quedarnos con los enteros definidos en el intervalo
+% despues de realizar el escalamiento.
 %
 % Si la operación realizada es una compresión y se pierden datos de los
 % extremos, se llama Decimation.
@@ -35,7 +38,34 @@
 % altura siguiente al punto y dividir esa suma entre 2. Asi se estaría
 % definiendo esa altura con ese valor.
 % 
-%% Objetivos
+% Por ejemplo:
+%
+% La función definida por:
+%%
+% <<grafo1.png>>
+%
+% Con gráfica:
+%%
+% <<grafo2.jpg>>
+%
+% Al aplicarle un escalamiento horizontal de la forma f[2n] la funcion
+% queda definida asi:
+%%
+% <<grafo3.png>>
+%
+% Como podemos observar queda definido para numeros decimales pero las
+% señales en tiempo discreto solo estan definidas para numeros enteros por
+% lo que solo se consideran los enteros dentro de esos intervalos, asi que
+% la grafica de la señal quedaria asi:
+%%
+% <<grafo4.jpg>>
+%
+% Cabe destacar que en este ejemplo se consideraron las alturas que no
+% estaban definidas como ceros.
+%
+% Con eso se ejemplifican los problemas que se tienen al realizar un
+% escalamiento horizontal en señales en tiempo discreto.
+%%% Objetivos
 % * Manipulación básica de MATLAB
 % * Gráficas de señales reales y complejas discretas
 % * Transformación de señales discretas (escalamientos y traslaciones)
