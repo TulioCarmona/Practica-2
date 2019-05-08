@@ -1,4 +1,4 @@
-%% Práctica 03: Señales en tiempo discreto
+%% Práctica 04: Convolución y correlación
 %
 % *Intituto Politécnico Nacional*
 %
@@ -15,122 +15,303 @@
 % * Ordorica Muñoz Leonardo Antonio
 %
 %% Introducción
-% Al trabajar con señales en tiempo discreto se complica un poco al momento
-% de realizar operaciones con dichas señales, debido a que estan definidas
-% solo para numeros enteros.
-% Por lo tanto al realizar un escalamiento horizontal, si este queda
-% definido para un numero decimal, se perderian los datos que quedaban
-% contenidos en esos puntos.
+% Existen ocasiones en las que se nos presentan problemas sencillos de
+% resolver en si mismos pero con un conflicto, se necesita resolver una
+% integral bastante dificil sino imposible con métodos conocidos como
+% tecnicas de integración en estas ocasiones será mas sencillo realizar las
+% integrales mediante algunos métodos llamados métodos numéricos.
+%
+% A continuación se realiza un resumen de algunos de los métodos numéricos
+% existentes para la resolución de integrales dificiles.
+%
+% Método de fórmulas cerradas de Newton-Cotes:
 % 
-% Lo que se hace es quedarnos con los enteros definidos en el intervalo
-% despues de realizar el escalamiento.
-%
-% Si la operación realizada es una compresión y se pierden datos de los
-% extremos, se llama Decimation.
-%
-% Si la operación realizada es una expansión se a la perdida de datos se le
-% llama Interpolation.
-%
-% A los puntos donde pudieran faltar esos datos se les puede considerar que
-% son cero, que no estan definidos o se le puede hacer una interpolación.
-%
-% La interpolación consiste en tomar la altura anterior al punto más la
-% altura siguiente al punto y dividir esa suma entre 2. Asi se estaría
-% definiendo esa altura con ese valor.
+% Cabe resaltar que se les llama fórmulas cerradas debido a que se utilizan
+% los extremos del intervalo de integración, es decir, que la función queda
+% encerrada en dicho intervalo.
 % 
-% Por ejemplo:
+% Con este metodo se puede encontrar un polinomio que sea muy parecido a la
+% función original, dicho polinomio va a coincidir con la función en
+% ciertos número de puntos más un término de error. El objetivo de esto es
+% integrar el polinomio más el término de error en lugar de la función
+% original. Se tendrán distintas fórmulas de Newton-Cotes que dependerán
+% del grado del polinomio que se quiera encontrar, desde el punto inferior
+% a hasta el punto superior b. Estos polinomios nos van a dar distintas
+% técnicas de integración.
+% Cada uno de estos puntos intermedios estan separados la misma distancia,
+% esta distancia se llama paso.
 %
-% La función definida por:
-%%
-% <<grafo1.png>>
+% El primero de los puntos será $X_{0}=a$ y el último punto será $X_{n}=b$.
 %
-% Con gráfica:
-%%
-% <<grafo2.jpg>>
-%
-% Al aplicarle un escalamiento horizontal de la forma f[2n] la funcion
-% queda definida asi:
-%%
-% <<grafo3.png>>
-%
-% Como podemos observar queda definido para numeros decimales pero las
-% señales en tiempo discreto solo estan definidas para numeros enteros por
-% lo que solo se consideran los enteros dentro de esos intervalos, asi que
-% la grafica de la señal quedaria asi:
-%%
-% <<grafo4.jpg>>
-%
-% Cabe destacar que en este ejemplo se consideraron las alturas que no
-% estaban definidas como ceros.
-%
-% Con eso se ejemplifican los problemas que se tienen al realizar un
-% escalamiento horizontal en señales en tiempo discreto.
-%
-%% Objetivos
-% * Manipulación básica de MATLAB
-% * Gráficas de señales reales y complejas discretas
-% * Transformación de señales discretas (escalamientos y traslaciones)
-% * Calculo de energía y potencia de señales discretas
-%% Desarrollo
+% El paso se define como:
 % 
-%% Problema 1
-% Se crea una funcion $f:N \rightarrow R$ la funcion la llamaremos _fun1_ y
-% regreseara la evaluación de $f[n]=r^ncos[\Omega n]+ r^nsen(\Omega n)j$,
-% para que se pueda ejecutar se le tendra que enviar el valor de _r_ y de
-% $\Omega$ asi como el funto en que se desea evaliar la funcion que en este
-% caso será $n_0$.
+% $h=\frac{b-a}{h}$
 %
-%   function [a] = fun1(r,w,n0)
-%   f = @(n) (r^n)*cos(w*n) + (r^n)*sin(w*n)*i;
-%   a = f(n0);
-%   end
-%% Problema 2
-% A continuacuón crearemos una funcion de matlab _fun2_ que grafique en tiempo
-% discreto la siguiente función $x[n]=na^nu[n]$ para $n= -2,...,10$ y con
-% $a=0.9$. A la funcion solo se le enviaran los parametros pues estara
-% previamente definida para evaluar la funcion antes mensionada.
+% Y cada punto será:
+% 
+% $X_{i}=X_{0}+ih$, asi cada punto tendrá la misma distancia al anterior.
 %
-n = -2:10;
-a = 0.9;
-fun2(n,a)
-%% Problema 3
+% A la primera de las fórmulas se le conoce como Regla del trapecio o
+% fórmula cerrada de Newton Cotes de 2 puntos, la cual es utilizada para 
+% obtener un polinomio de grado 1 (n=1):
+% Se le llama regla del trapecio porque lo que se hace es calcular el área
+% del trapecio formado por el polinomio de grado 1.
 %
-%% Problema 4
-% Funcion que calcula la energia de una señal discreta pasandole como
-% parámetros un vector de tiempo y las alturas asignadas a cada entero del
-% vector de tiempo e imprime la gráfica de la señal.
-%%
-%   function [ex] = energiadis(tiempo,alturas) % La funcion energia pide un limite inferior y un limite superior
-%   ex=sum(alturas.*alturas); % Se usa la funcion sum para sumar todas las alturas de la señal
-%   stem(tiempo,alturas)
-%   xlabel('n'); ylabel('x[n]'); 
-%   grid on;
-%   title('Gráfica de la señal ingresada');
-%   axis([min(tiempo)-2 max(tiempo)+2 min(alturas)-2 max(alturas)+2]);
-%   ax = gca;
-%   ax.XAxisLocation = 'origin';
-%   ax.YAxisLocation = 'origin';
-%   end
+% $X_{0}=a$,   $X_{1}=b$,   $n=1$,   $h=b-a$
 %
-%% Problema 5
-% Resuelva el problema 3.1.1 c) de Lathi, aplicando su función anterior
-% El inciso c) del problema 3.1.1 de Lathi tiene una señal definida de -3 a
-% 3, para todas los demas enteros es cero.
+% Y su fórmula es:
 %
-% A esos tiempos le corresponden las alturas definidas por la función
-% x[n]=3n;
+% $\int_{X_{0}}^{X_{1}} f(x)dx=\frac{h}{2}[f(X_{0})+f(X_{1})] -
+% \frac{h^{3}}{12} f^{''}(\xi)$,
+% $X_{0}<\xi<X_{1}$
+% Observamos que esta fórmula contiene un término de error que depende de
+% la segunda derivada de f(x).
+% Existe algo llamado grado de precisión, el cuál es el grado del polinomio
+% necesario para el cuál la integral tiene error igual a cero respecto de
+% la función original.
 %
-% A continuación se utiliza la función energiadis con esos datos:
+% Por ejemplo, se requiere realizar la siguiente integral, la cual es
+% dificil de realizar por tecnicas de integración conocidas, por lo que se
+% utilizará la regla del trapecio para aproximar su resultado.
 %
-%%
-n=-3:3;
-x=3*n;
-energiadis(n,x)
-%%
-% Como podemos observar la función energiadis trabaja adecuadamente.
-%% Problema 6
+% $\int_{-1}^{1} e^{-x^{2}}dx$
+%
+% Aplicamos las fórmulas descritas anteriormente:
+%
+% $\int_{-1}^{1}
+% e^{-x^{2}}dx=\frac{2}{2}[e^{-1}+e^{-1}]-\frac{8}{12}[-2e^{-\xi^{2}}(1-2\xi^{2})]$,
+% $-1<\xi<1$
+% 
+% Se realizan las evaluaciones y simplificaciones correspondientes y
+% obtenemos:
+%
+% $0.7357+\frac{4}{3}e^{-\xi^{2}}(1-2\xi^{2})$,
+% $-1<\xi<1$
+%
+% Como podemos observar nos queda un termino dependiente de $\xi$, este
+% termino nos indica que existe un valor de $\xi$ que al sumar o restar el
+% termino nos arroje el valor exacto de la evaluacion de la integral. Cabe
+% destacar que no podemos saber cual es dicho valor, solo podemos saber
+% entre que valor y que valor se va a encontrar.
+%
+% A continuación vamos a observar una segunda regla, llamada Regla de
+% Simpson o fórmula cerrada de Newton-Cotes de 3 puntos, la cual es
+% utilizada para obtener un polinomio de grado 2 (n=2):
+%
+% En este método lo que se hace es encontrar el área de la parábola
+% definida por los puntos $X_{0}$, $X_{1}$ y $X_{2}$. Aqui también existe
+% un término de error que depende de la cuarta derivada de f(x).
+%
+% % $X_{0}=a$,   $X_{2}=b$,   $n=2$,   $h=\frac{b-a}{2}$
+%
+% La fórmula de la Regla de Simpson es:
+%
+% $\int_{X_{0}}^{X_{2}} f(x)dx=\frac{h}{3}[f(X_{0})+4f(X_{1})+f(X_{2})] -
+% \frac{h^{5}}{90} f^{4}(\xi)$,
+% $X_{0}<\xi<X_{2}$
+%
+% A continuación volveremos a realizar la misma integral pero con la Regla
+% de Simpson:
+%
+% $\int_{-1}^{1} e^{-x^{2}}dx$
+%
+% Aplicamos las fórmulas descritas anteriormente:
+%
+% $\int_{-1}^{1}
+% e^{-x^{2}}dx=\frac{1}{3}[e^{-1}+4e^{0}+e^{-1}]-\frac{1}{90}[-4e^{-\xi^{2}}(-4\xi^{4}+12\xi^{2}-3)]$,
+% $-1<\xi<1$
+% 
+% Se realizan las evaluaciones y simplificaciones correspondientes y
+% obtenemos:
+%
+% $1.5785+\frac{2}{45}e^{-\xi^{2}}({-4\xi^{4}}+12\xi^{2}-3)$,
+% $-1<\xi<1$
+% 
+% Como podemos observar nos queda un termino dependiente de $\xi$, este
+% termino nos indica que existe un valor de $\xi$ que al sumar o restar el
+% termino nos arroje el valor exacto de la evaluacion de la integral. Cabe
+% destacar que no podemos saber cual es dicho valor, solo podemos saber
+% entre que valor y que valor se va a encontrar.
+%
+% A continuación vamos a observar una tercera regla, llamada Regla de 3/8
+% de Simpson o fórmula cerrada de Newton-Cotes de 4 puntos, la cual es
+% utilizada para obtener un polinomio de grado 3 (n=3):
+%
+% Aqui también existe un término de error que depende de la cuarta derivada
+% de f(x).
+%
+% % $X_{0}=a$,   $X_{3}=b$,   $n=3$,   $h=\frac{b-a}{3}$
+%
+% La fórmula de la Regla de 3/8 de Simpson es:
+%
+% $\int_{X_{0}}^{X_{3}} f(x)dx=\frac{3}{8}[f(X_{0})+3f(X_{1})+3f(X_{2})+f(X_{3})] -
+% \frac{3h^{5}}{80} f^{4}(\xi)$,
+% $X_{0}<\xi<X_{3}$
+%
+% A continuación volveremos a realizar la misma integral pero con la Regla
+% de 3/8 de Simpson:
+%
+% $\int_{-1}^{1} e^{-x^{2}}dx$
+%
+% Aplicamos las fórmulas descritas anteriormente:
+%
+% $\int_{-1}^{1}
+% e^{-x^{2}}dx=\frac{3}{8}(\frac{2}{3})[e^{-1}+3e^{-\frac{1}{9}}+3e^{-\frac{1}{9}}+e^{-1}]-\frac{3}{80}[-4e^{-\xi^{2}}(-4\xi^{4}+12\xi^{2}-3)]$,
+% $-1<\xi<1$
+% 
+% Se realizan las evaluaciones y simplificaciones correspondientes y
+% obtenemos:
+%
+% $1.5261+\frac{8}{405}e^{-\xi^{2}}({-4\xi^{4}}+12\xi^{2}-3)$,
+% $-1<\xi<1$
+% 
+% Como podemos observar nos queda un termino dependiente de $\xi$, este
+% termino nos indica que existe un valor de $\xi$ que al sumar o restar el
+% termino nos arroje el valor exacto de la evaluacion de la integral. Cabe
+% destacar que no podemos saber cual es dicho valor, solo podemos saber
+% entre que valor y que valor se va a encontrar.
+%
+% Asi mismo podemos observar que esta aproximación es mejor que las
+% anteriores ya qu esta mas cerca del valor de la integral que es de
+% aproximadamente 1.49. Por lo que podemos concluir que entre mas alto es
+% el grado del polinomio utilizado la aproximación es mejor.
+%
+% Existen tambien las llamadas Fórmulas compuestas de Newton-Cotes.
+%
+% En estas fórmulas lo que se hace es subdividir las aproximaciones
+% anteriores para mejorar la precisión.
+%
+% Tenemos primero la Regla compuesta del Trapecio:
+%
+% Ya no usamos un solo trapecio para la aproximación sino el número de
+% trapecios necesarios para una buena aproximación. Aqui los puntos
+% extremos solo se evaluan una vez y los puntos intermedios dos veces.
+% Ahora n pasa a ser el número de subintervalos, ya no es el grado del
+% polinomio. El término de error sigue dependiendo de la segunda derivada
+% de f(x).
+%
+% n es el número de subintervalos.
+%
+% $h=\frac{b-a}{n}$, paso
+%
+% $X_{j}=a+jh$
+%
+% La fórmula de la Regla compuesta del trapecio es:
+%
+% $\int_{a}^{b} f(x)dx=\frac{h}{2}[f(a)+2\sum_{j=1}^{n-1}f(Xj)+f(b)] -
+% \frac{b-ah^{3}}{12} f^{''}(\mu)$,
+% $\mu\in(a,b)$
+%
+% A continuación volveremos a realizar la misma integral pero con la Regla
+% compuesta del trapecio:
+%
+% $\int_{-1}^{1} e^{-x^{2}}dx$
+%
+% Aplicamos las fórmulas descritas anteriormente:
+%
+% $\int_{-1}^{1}
+% e^{-x^{2}}dx=\frac{0.2}{2}[e^{-1}+2\sum_{j=1}^{n-1}e^{-Xj^{2}}+e^{-1}]-\frac{2}{12}(0.2)^{2}[-2e^{-\mu^{2}}(1-2\mu^{2})]$,
+% $-1<\mu<1$
+%
+% Se realizan las evaluaciones y simplificaciones correspondientes y
+% obtenemos:
+%
+% $1.4887+0.0133e^{-\mu^{2}}(1-2\mu^{2}); 
+% $-1<\mu<1$
+%
+% Como podemos observar la aproximación con este método es mejor que con
+% los anteriores.
+%
+% Asi como existe la Regla compuesta del trapecio, también tenemos la Regla
+% compuesta de Simpson. Aqui cada 2 subintervalos se usan para crear una
+% parábola. Asi entre más parábolas existan la aproximación va a ser mejor.
+% Los puntos extremos forman parte de ambas parábolas, es decir, la
+% anterior y la siguiente a ellos, a excepción de los extremos del
+% intervalo que solo forman parte de una parábola cada uno, la primera y la
+% ultima. Aqui n tambien es el número de subintervalos y n debe ser par. El
+% término de error sigue dependiendo de la cuarta derivada de f(x).
+%
+% n es par y es el número de subintervalos.
+%
+% $h=\frac{b-a}{n}$, paso
+% 
+% $Xj=a+jh$
+%
+% La fórmula de la Regla compuesta de Simpson es la siguiente:
+%
+% $\int_{a}^{b} f(x)dx=\frac{h}{3}[f(a)+2\sum_{j=1}^{\frac{n}{2}-1}f(X_{2j})+4\sum_{j=1}^{\frac{n}{2}}f(X_{2j-1})+f(b)] -
+% \frac{b-ah^{4}}{180} f^{4}(\mu)$,
+% $\mu\in(a,b)$
+%
+% A continuación volveremos a realizar la misma integral pero con la Regla
+% compuesta del trapecio:
+%
+% $\int_{-1}^{1} e^{-x^{2}}dx$
+%
+% Aplicamos las fórmulas descritas anteriormente:
+%
+% $\int_{-1}^{1}
+% e^{-x^{2}}dx=\frac{0.2}{3}[e^{-1}+2\sum_{j=1}^{4}e^{-X_{2j}^{2}}+4\sum_{j=1}^{5}e^{-(X_{2j-1}^{2}}+e^{-1}]-\frac{2}{180}(0.2)^{4}[-4e^{-\mu^{2}}(-4\mu^{4}+12\mu^{2}-3)]$,
+% $-1<\mu<1$
+%
+% Se realizan las evaluaciones y simplificaciones correspondientes y
+% obtenemos:
+%
+% $1.4936+0.000071e^{-\mu^{2}}(-4\mu^{4}+12\mu^{2}-3); 
+% $-1<\mu<1$
+%
+% Como podemos observar la aproximación con este método es aun mejor que con
+% los anteriores.
+%
+% El ultimo metodo que revisaremos esta vez es el de Cuadratura Gaussiana.
+%
+% Este metodo trata de aproximar la integral con evaluaciones de la función
+% en determinados puntos multiplicados por determinadas constantes. En las
+% fórmulas de Newton-Cotes se usan los polinomios de Lagrange para obtener
+% un cierto grado de precisión. Ahora se utilizarán polinomios de Legendre
+% para aproximar integrales de funciones de tal forma que los puntos de
+% evaluación satisfagan un cierto grado de precisión para que no haya
+% error.
+%
+% Se utilizan en el intervalo -1,1 ya que tienen propiedades interesantes
+% en ese intervalo. Sus raices son reales. Debido a que no siempre se
+% requiere integrar de -1 a 1 se usa un cambio de variable para adecuarlo
+% del cual hablaremos en un momento.
+%
+% La fórmula de la Cuadratura Gaussiana es:
+%
+% $\int_{a}^{b}f(x)dx=\sum_{i=1}^{n}C_{i}f(x_{i})$, 2n parámetros
+%
+% Donde $C_{i}$ es el coeficiente del polinomio de Legendre por el que se
+% va a multiplicar la evaluación de la función en las raices del polinomio
+% de Legendre $f(x_{i})$.
+%
+% Si se requiere integrar en otro intervalo que no sea de -1 a 1 se utiliza
+% la siguiente adecuación de la integral original, asi, se podran utilizar
+% los polinomios de Legendre sin problemas.
+%
+% $\int_{a}^{b}f(x)dx=\int_{-1}{1}f(\frac{(b-a)t+a+b}{2})\frac{b-a}{2}dt$
+% 
+% A continuación daremos solución al mismo problema para concluir que
+% método es el mejor, primero se utilizará el polinomio de grado 2 y
+% posteriormente el polinomio de grado 3.
+%
+% Utilizando el polinomio de Legendre de grado 2:
+%
+% $\int_{-1}^{1}e^{-x^{2}}dx \supset
+% e^{-(0.5773502692)^{2}}+e^{-(-0.5773502692)^{2}} \supset 1.4331
+%
+% Utilizando el polinomio de Legendre de grado 3:
+%
+% $\int_{-1}^{1}e^{-x^{2}}dx \supset
+% 0.5555555556e^{-(0.7745966692)^{2}}+0.8888888889+0.5555555556e^{-(-0.7745966692)^{2}}
+% \supset 1.4986$
+%
+% Como podemos observar las aproximaciones con polinomios de Legendre son
+% mejores que las de Newton-Cotes por lo que es recomendable utilizarlas.
+%
 %% Referencias
-% # Martínez   R.,Senales   y   Sistemas:   Una   perspectiva. Recuperado   19   marzo,   2019,   de <http://rafneta.github.io http://rafneta.github.io>
+% # Martínez, R. [Mate y así]. (2018 Agosto). Métodos Numéricos:
+% Integración
+% [Lista de reproducción]. Recuperada de <https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD>
 % # Lathi, B. P.. (2005). Linear Systems and Signals. New York: Oxford University Press, Inc.
-% # Martínez, R. [Mate y así]. (2018 Agosto 17). Escalamiento horizontal de señales en tiempo discreto (6)
-% [Video]. Recuperado de <https://www.youtube.com/watch?v=lpFU5D7oY1w https://www.youtube.com/watch?v=lpFU5D7oY1w>
