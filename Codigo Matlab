@@ -64,6 +64,7 @@
 % $\int_{X_{0}}^{X_{1}} f(x)dx=\frac{h}{2}[f(X_{0})+f(X_{1})] -
 % \frac{h^{3}}{12} f^{''}(\xi)$,
 % $X_{0}<\xi<X_{1}$
+% 
 % Observamos que esta fórmula contiene un término de error que depende de
 % la segunda derivada de f(x).
 % Existe algo llamado grado de precisión, el cuál es el grado del polinomio
@@ -216,7 +217,7 @@
 % Se realizan las evaluaciones y simplificaciones correspondientes y
 % obtenemos:
 %
-% $1.4887+0.0133e^{-\mu^{2}}(1-2\mu^{2}); 
+% $1.4887+0.0133e^{-\mu^{2}}(1-2\mu^{2})$; 
 % $-1<\mu<1$
 %
 % Como podemos observar la aproximación con este método es mejor que con
@@ -257,7 +258,7 @@
 % Se realizan las evaluaciones y simplificaciones correspondientes y
 % obtenemos:
 %
-% $1.4936+0.000071e^{-\mu^{2}}(-4\mu^{4}+12\mu^{2}-3); 
+% $1.4936+0.000071e^{-\mu^{2}}(-4\mu^{4}+12\mu^{2}-3)$; 
 % $-1<\mu<1$
 %
 % Como podemos observar la aproximación con este método es aun mejor que con
@@ -298,14 +299,14 @@
 %
 % Utilizando el polinomio de Legendre de grado 2:
 %
-% $\int_{-1}^{1}e^{-x^{2}}dx \supset
-% e^{-(0.5773502692)^{2}}+e^{-(-0.5773502692)^{2}} \supset 1.4331
+% $\int_{-1}^{1}e^{-x^{2}}dx \approx
+% e^{-(0.5773502692)^{2}}+e^{-(-0.5773502692)^{2}} \approx 1.4331$
 %
 % Utilizando el polinomio de Legendre de grado 3:
 %
-% $\int_{-1}^{1}e^{-x^{2}}dx \supset
+% $\int_{-1}^{1}e^{-x^{2}}dx \approx
 % 0.5555555556e^{-(0.7745966692)^{2}}+0.8888888889+0.5555555556e^{-(-0.7745966692)^{2}}
-% \supset 1.4986$
+% \approx 1.4986$
 %
 % Como podemos observar las aproximaciones con polinomios de Legendre son
 % mejores que las de Newton-Cotes por lo que es recomendable utilizarlas.
