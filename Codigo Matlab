@@ -97,3 +97,80 @@ ax.YAxisLocation = 'origin';
 % * Manipulación de instrucciones en MATLAB
 % * Calculo númerico de los coeficientes de Fourier
 %
+%% Problema 7
+% Código que implementa la regla del trapecio compuesto para n=15 aplicado
+% al ejemplo de la práctica, en el cual la función a la que se le va a
+% calcular la serie de Fourier es $e^{-t/2}$, y al introducirla en la
+% fórmula para calcular los coeficientes obtenemos $e^{-(1/2+2jn)t}$.
+%%
+clear;
+h=pi/15;
+for k=1:1:15
+    t(k)=k*h;
+end
+D_0=(1/pi)*(h/2)*(1+2*sum(exp(-1/2*t))+exp(-1/2*pi))
+D_1=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*1)*t))+exp(-(1/2+2*1i*1)*pi))
+D_2=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*2)*t))+exp(-(1/2+2*1i*2)*pi))
+D_3=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*3)*t))+exp(-(1/2+2*1i*3)*pi))
+D_4=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*4)*t))+exp(-(1/2+2*1i*4)*pi))
+D_n=[D_0 D_1 D_2 D_3 D_4];
+n=[0:4];
+%%
+% Espectro de magnitud
+%%
+stem(n,abs(D_n));
+axis([-1 5 -0.5 1]);
+title('Espectro de fase');
+xlabel('n'); ylabel('|D_n|');
+grid on;
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%%
+% Espectro de fase
+stem(n,angle(D_n));
+axis([-1 5 -2 1]);
+title('Espectro de fase');
+xlabel('n'); ylabel('\angleD_n');
+grid on;
+ax = gca;
+ax.XAxisLocation = 'origin';
+ax.YAxisLocation = 'origin';
+%
+%%
+% Aqui tenemos las aproximaciones usando la regla del trapecio compuesto y
+% a continuación vamos a utilizar la aproximación usada en el COMPUTER
+% EXAMPLE C6.4 del Lathi para comparar cual de las dos aproximaciones es
+% mejor o más precisa.
+%
+%%
+T_0 = pi; N_0 = 256; T = T_0/N_0; t = (0:T:T*(N_0-1))'; M = 10;
+x = exp(-t/2); x(1)=(exp(-pi/2)+1)/2;
+D_n=fft(x)/N_0;
+n = [-N_0/2:N_0/2-1]';
+clf; subplot (2, 2, 1); stem(n, abs(fftshift (D_n)),'k');
+axis ([-M M -.1 .6]); xlabel('n'); ylabel('|D_n|');
+subplot (2, 2, 2); stem(n, angle(fftshift(D_n)),'k');
+axis([-M M -pi pi]); xlabel ('n'); ylabel('\angle D_n [rad]');
+D_n(1)
+D_n(2)
+D_n(3)
+D_n(4)
+D_n(5)
+%%
+% A continuación haremos una comparación entre los dos algoritmos listando
+% en una tabla cada uno;
+%%
+% Del lado izquierdo se encuentran los coeficientes calculados con el
+% algoritmo del Lathi y del lado derecho los calculados con la regla del
+% trapecio compuesto.
+Tabla=[D_n(1),D_0;D_n(2),D_1;D_n(3),D_2;D_n(4),D_3;D_n(5),D_4;]
+%%
+% Como podemos observar de aqui y con las graficas, las aproximaciones son
+% mejores con el algoritmo presentado en el Lathi.
+%
+%% Referencias
+% # Martínez, R. [Mate y así]. (2018 Agosto). Métodos Numéricos:
+% Integración
+% [Lista de reproducción]. Recuperada de <https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD>
+% # Lathi, B. P.. (2005). Linear Systems and Signals. New York: Oxford University Press, Inc.
