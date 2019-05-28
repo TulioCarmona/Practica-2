@@ -1,4 +1,4 @@
-%% Práctica 05: Series de Fourier en tiempo continuo
+%% Práctica 06: Sistemas diferenciales y en diferencias
 %
 % *Intituto Politécnico Nacional*
 %
@@ -14,163 +14,79 @@
 %
 % * Ordorica Muñoz Leonardo Antonio
 %
-%% Introducción
-% En este momento vamos a hablar acerca de los coeficientes de una serie de
-% Fourier discreta exponencial compleja, conocidos como los $D_{n}$.
-% Para poder trabajar las series de Fourier con software necesitamos hacer
-% uso de las aproximaciones numéricas trabajadas en la práctica anterior
-% para calcular numéricamente los coeficientes $D_{n}$ de la serie de
-% Fourier exponencial compleja.
-% 
-% En este caso haremos uso de la Cuadratura Gaussiana para aproximar la
-% integral del calculo de los coeficientes:
+%% Sistemas diferenciales
+% Realizar los siguientes problemas para el siguiente ejemplo.
 %
-% Para exponer el uso de la Cuadratura Gaussiana para calcular los
-% coeficientes de la serie vamos a realizar un ejemplo del calculo de los
-% coeficientes del problema 4 del PR10:
+% $\frac{dy(t)}{dt}+2\frac{dy(t)}{dt}+2y(t)=\frac{dx(t)}{dt}+2x(t)$
 %
-% En este caso $T_{0}=2$ y $\Omega_{0}=\frac{2\pi}{T_{0}}=pi$
+% Con $x(t)=e^{-t}u(t)$ y con condiciones iniciales y'(0)=1 y y(0)=1.
 %
-% Procedemos a calcular los coeficientes $D_{n}$
-%
-% La fórmula de la señal es $x(t)=2$ de -1/2 a 1/2 y al introducirla en la
-% fórmula para calcular los coeficientes nos queda como:
-%
-% $2e^{-jnt\pi}$, la cual será la función a integrar desde -1/2 hasta 1/2
-%
-% $\frac{1}{2}\int_{-\frac{1}{2}}^{\frac{1}{2}}2e^{-jnt\pi}dt$
-%
-% Asi, procedemos con la integral realizandola con la Cuadratura Gaussiana
-% pero como los limites de integración no son desde -1 hasta 1, tenemos que
-% hacer uso de la fórmula para el adecuamiento de los límites.
-%
-% Por lo que al aplicar la fórmula, tenemos que:
-%
-% $\frac{1}{2}\int_{-1}^{1}e^{-jnt\pi/2}dt$
-%
-% Sería la nueva fórmula a integrar, pudiendo realizarla de -1 a 1
-%
-% Asi tenemos que $\frac{1}{2}\int_{-1/2}^{1/2}2e^{-jnt\pi}dt$
-%
-% Puede ser aproximada por:
-% 
-% $\frac{1}{2}\int_{-1}^{1}e^{-jnt\pi/2}dt$
-% 
-% En este caso haremos uso del polinomio de Legendre de grado 2:
-% 
-% Realizando las respectivas sustituciones:
-%
-% $0.5(e^{-0.9069*jn}+e^{0.9069*jn})$
-%
-% Ahora procedemos a graficar el espectro de Fourier para estos
-% coeficientes:
-%
-% Espectro de magnitud
+% Para fines practicos se va a cambiar la definición del escalon en matlab.
 %%
-n=-10:10;
-D_n=0.5*(exp(-0.9069*1i*n)+exp(0.9069*1i*n));
-stem(n,abs(D_n));
-axis([-11 11 -0.5 2]);
-title('Espectro de magnitud');
-xlabel('n'); ylabel('|D_n|');
-grid on;
-ax = gca;
-ax.XAxisLocation = 'origin';
-ax.YAxisLocation = 'origin';
-%%
-% Espectro de fase
-%%
-stem(n,angle(D_n));
-axis([-11 11 -1 4]);
-title('Espectro de fase');
-xlabel('n'); ylabel('\angleD_n');
-grid on;
-ax = gca;
-ax.XAxisLocation = 'origin';
-ax.YAxisLocation = 'origin';
-%%
-% Con esto podemos observar que la aproximación con los polinomios de
-% Legendre (Cuadratura Gaussiana) es muy buena ya que los espectros son
-% correctos.
-%% Objetivos
-% * Realizar gráficas de series de Fourier exponenciales y trigonométricas en tiempo continuo
-% * Manipulación de instrucciones en MATLAB
-% * Calculo númerico de los coeficientes de Fourier
+sympref('HeavisideAtOrigin', 1);
+%% Sistemas diferenciales 1
+% Muestra la función de transferencia del sistema.
 %
-%% Problema 7
-% Código que implementa la regla del trapecio compuesto para n=15 aplicado
-% al ejemplo de la práctica, en el cual la función a la que se le va a
-% calcular la serie de Fourier es $e^{-t/2}$, y al introducirla en la
-% fórmula para calcular los coeficientes obtenemos $e^{-(1/2+2jn)t}$.
-%%
-clear;
-h=pi/15;
-for k=1:1:15
-    t(k)=k*h;
-end
-D_0=(1/pi)*(h/2)*(1+2*sum(exp(-1/2*t))+exp(-1/2*pi))
-D_1=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*1)*t))+exp(-(1/2+2*1i*1)*pi))
-D_2=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*2)*t))+exp(-(1/2+2*1i*2)*pi))
-D_3=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*3)*t))+exp(-(1/2+2*1i*3)*pi))
-D_4=(1/pi)*(h/2)*(1+2*sum(exp(-(1/2+2*1i*4)*t))+exp(-(1/2+2*1i*4)*pi))
-D_n=[D_0 D_1 D_2 D_3 D_4];
-n=[0:4];
-%%
-% Espectro de magnitud
-%%
-stem(n,abs(D_n));
-axis([-1 5 -0.5 1]);
-title('Espectro de fase');
-xlabel('n'); ylabel('|D_n|');
-grid on;
-ax = gca;
-ax.XAxisLocation = 'origin';
-ax.YAxisLocation = 'origin';
-%%
-% Espectro de fase
-stem(n,angle(D_n));
-axis([-1 5 -2 1]);
-title('Espectro de fase');
-xlabel('n'); ylabel('\angleD_n');
-grid on;
-ax = gca;
-ax.XAxisLocation = 'origin';
-ax.YAxisLocation = 'origin';
+% Para la función de transferencia del sistema necesitamos que la entrada
+% del sistema sea un impulso y no hay condiciones iniciales, entonces el
+% codigo solo se utilizaria hasta el punto que no aplique la transformada
+% inversa.
 %
+% Para este problema se utilizará una modificación de la función
+% "laplace2016a" llamada "transferencia".
 %%
-% Aqui tenemos las aproximaciones usando la regla del trapecio compuesto y
-% a continuación vamos a utilizar la aproximación usada en el COMPUTER
-% EXAMPLE C6.4 del Lathi para comparar cual de las dos aproximaciones es
-% mejor o más precisa.
+syms t;
+transferencia([2 2 1],[2 1],[0 0],0,dirac(t),10)
+%% Sistemas diferenciales 2
+% Muestra la respuesta al impulso (simbólico, gráfica)
 %
+% Para este problema utilizamos el codigo tal cual, ya que la respuesta al
+% impulso es la transformada inversa de la función de transferencia.
 %%
-T_0 = pi; N_0 = 256; T = T_0/N_0; t = (0:T:T*(N_0-1))'; M = 10;
-x = exp(-t/2); x(1)=(exp(-pi/2)+1)/2;
-D_n=fft(x)/N_0;
-n = [-N_0/2:N_0/2-1]';
-clf; subplot (2, 2, 1); stem(n, abs(fftshift (D_n)),'k');
-axis ([-M M -.1 .6]); xlabel('n'); ylabel('|D_n|');
-subplot (2, 2, 2); stem(n, angle(fftshift(D_n)),'k');
-axis([-M M -pi pi]); xlabel ('n'); ylabel('\angle D_n [rad]');
-D_n(1)
-D_n(2)
-D_n(3)
-D_n(4)
-D_n(5)
-%%
-% A continuación haremos una comparación entre los dos algoritmos listando
-% en una tabla cada uno;
-%%
-% Del lado izquierdo se encuentran los coeficientes calculados con el
-% algoritmo del Lathi y del lado derecho los calculados con la regla del
-% trapecio compuesto.
-Tabla=[D_n(1),D_0;D_n(2),D_1;D_n(3),D_2;D_n(4),D_3;D_n(5),D_4;]
-%%
-% Como podemos observar de aqui y con las graficas, las aproximaciones son
-% mejores con el algoritmo presentado en el Lathi.
+syms t;
+laplace2016a([2 2 1],[2 1],[0 0],0,dirac(t),10)
+%% Sistemas diferenciales 3
+% Muestra la respuesta a entrada cero (simbólico, gráfica)
 %
+% Utilizaremos la misma función pero la entrada será un cero y se utilizan
+% las condiciones iniciales dadas.
+% Debido a que la entrada es cero se hará una nueva modificación a la
+% función y se llamará "entradacero".
+%%
+syms t;
+entradacero([2 2 1],[2 1],[1 1],0,0,10)
+%% Sistemas diferenciales 4
+% Muestra la respuesta a estado cero (simbólico, gráfica)
+%
+% Utilizaremos la misma función pero no extistiran condiciones iniciales y
+% esta vez utilizaremos la entrada dada.
+%%
+syms t;
+laplace2016a([2 2 1],[2 1],[0 0],0,exp(-t)*heaviside(t),10)
+%% Sistemas diferenciales 5
+% Muestra la respuesta total (simbólico, gráfica)
+%
+% Utilizaremos la misma función y esta vez utilizaremos la entrada y las
+% condiciones iniciales dadas.
+%%
+syms t;
+laplace2016a([2 2 1],[2 1],[1 1],0,exp(-t)*heaviside(t),10)
+%% Sistemas diferenciales 6
+% La respuesta total al escalón con condiciones iniciales 0 (simbólico, gráfica)
+%
+% Ahora utilizaremos como entrada un escalon unitario y condiciones
+% iniciales cero.
+%%
+syms t;
+laplace2016a([2 2 1],[2 1],[0 0],0,heaviside(t),10)
+%% Sistemas diferenciales 7
+% Usando subplot, depliega una figura con 5 gráficas
+%
+% Para esta parte haremos uso de la función subplot y colocaremos las
+% graficas previamente guardadas como figuras.
+%%
+graficas();
 %% Referencias
-% # Martínez, R. [Mate y así]. (2018 Agosto). Métodos Numéricos:
-% Integración
-% [Lista de reproducción]. Recuperada de <https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD https://www.youtube.com/playlist?list=PLSC7gO5dTNPewJkJ5Zh3Y7xHfy_fnDKqD>
+% # Martínez, R. [Mate y así]. (2019 Marzo). Conceptos de Sistemas
+% [Lista de reproducción]. Recuperada de <https://www.youtube.com/playlist?list=PLSC7gO5dTNPd3lHkJ7MJLTodTwo3xV26v https://www.youtube.com/playlist?list=PLSC7gO5dTNPd3lHkJ7MJLTodTwo3xV26v>
 % # Lathi, B. P.. (2005). Linear Systems and Signals. New York: Oxford University Press, Inc.
