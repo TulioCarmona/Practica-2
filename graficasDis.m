@@ -1,13 +1,13 @@
 function graficasDis()
-f1=openfig('graficaDis2.fig','reuse');
+f1=openfig('graficaDis2.fig','reuse','invisible');
 ax1=gca;
-f2=openfig('graficaDis3.fig','reuse');
+f2=openfig('graficaDis3.fig','reuse','invisible');
 ax2=gca;
-f3=openfig('graficaDis4.fig','reuse');
+f3=openfig('graficaDis4.fig','reuse','invisible');
 ax3=gca;
-f4=openfig('graficaDis5.fig','reuse');
+f4=openfig('graficaDis5.fig','reuse','invisible');
 ax4=gca;
-f5=openfig('graficaDis6.fig','reuse');
+f5=openfig('graficaDis6.fig','reuse','invisible');
 ax5=gca;
 f=figure;
 s1=subplot(2,3,1);
